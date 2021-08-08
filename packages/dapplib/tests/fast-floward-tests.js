@@ -330,6 +330,31 @@ describe('Flow Dapp Tests', async () => {
       // 6) assert the result from step 4) equals 25.0
       assert.equal(res2.result, 25.0, "accounts[0] should has 25.0 balance")
     })
+
+    it(`removes all kittyitems from sale`, async () => {
+      // put 1 to sell
+      let testData1 = {
+        signer: config.accounts[0],
+        itemID: "1",
+        price: "15.0"
+      }
+      await DappLib.kittyItemsMarketSellMarketItem(testData1)
+      let testData2 = {
+        marketCollectionAddress: config.accounts[0]
+      }
+      let res1 = await DappLib.kittyItemsMarketReadSaleCollectionIDs(testData2)
+      assert.equal(res1.result[0], 1, "the SaleCollection should has an itemID == 1 in it at index 0")
+
+      let testData3 = {
+        signer: config.accounts[0],
+      }
+      let testData4 = {
+        marketCollectionAddress: config.accounts[0]
+      }
+      await DappLib.kittyItemsRemoveAllMarketImtems(testData3)
+      let res2 = await DappLib.kittyItemsMarketReadSaleCollectionLength(testData4)
+      assert.equal(res2.result, 0, "the SaleCollection should has length 0")
+    })
   });
 
 });

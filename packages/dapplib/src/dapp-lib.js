@@ -492,6 +492,28 @@ module.exports = class DappLib {
     }
   }
 
+  // kittyItemsRemoveAllMarketImtems
+  // calls transactions/kittyitemsmarket/remove_all_market_items.cdc
+  //
+  // signer/proposer/authorizer: data.signer
+  //
+  static async kittyItemsRemoveAllMarketImtems(data) {
+
+    let result = await Blockchain.post({
+      config: DappLib.getConfig(),
+      roles: {
+        proposer: data.signer
+      }
+    },
+      'kittyitemsmarket_remove_all_market_items',
+    );
+
+    return {
+      type: DappLib.DAPP_RESULT_TX_HASH,
+      label: 'Transaction Hash',
+      result: result.callData.transactionId
+    }
+  }
 
 
 

@@ -170,6 +170,12 @@ export default class FastFlowardHarness extends LitElement {
           </account-widget>
         </action-card>
       
+        <action-card title="DAY 5: Kitty Items Market - Remove all market items" description="Remove all market items"
+          action="kittyItemsRemoveAllMarketImtems" method="post" fields="signer">
+          <account-widget field="signer" label="Signer" placeholder="Signer">
+          </account-widget>
+        </action-card>
+      
       
       </page-body>
       <page-panel id="resultPanel"></page-panel>
